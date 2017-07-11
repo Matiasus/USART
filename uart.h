@@ -15,6 +15,10 @@
 #ifndef __UART_H__
 #define __UART_H__
 
+  #define FREQ 16000000
+  #define BAUD 9600
+  #define UBRR_VAL (FREQ/(16*BAUD))-1
+
   /**
    * @description Init UART
    * 
