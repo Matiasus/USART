@@ -21,6 +21,6 @@
    * @param  void
    * @return void
    */
-  void DelayMs(uint8_t);
+  void UartInit(void);
 
 #endif
