@@ -37,3 +37,38 @@ void UsartInit (void)
         | (1 << UPM1)   // even parity
         | (1 << USBS);  // 2 stop bits
 }
+
+/**
+ * @description USART transmition 8 bits max
+ *
+ * @param  unsigned char
+ * @return void
+ */
+void UsartTransMax8bits (unsigned char data)
+{
+  // wait for transmit buffer empty
+  while ((UCSRA & (1 << UDRE) == 0);
+  // write data to Usart transmitter register
+  UDR = data;
+}
+         
+         /**
+ * @description USART transmition 9 bits
+ *
+ * @param  unsigned int
+ * @return void
+ */
+void UsartTrans9bits (unsigned int data)
+{
+  // wait for transmit buffer empty
+  while ((UCSRA & (1 << UDRE) == 0);
+  // clear 8th bit
+  UCSRB &= ~(1 << TXB8);
+  // check if 9th bit is set
+  if (data & 0x0100) {
+    // write 9th bit
+    UCSRB |= (1 << TXB8);
+  }
+  // write data to Usart transmitter register
+  UDR = data;
+}
