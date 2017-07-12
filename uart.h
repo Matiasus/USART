@@ -35,4 +35,12 @@
    */
   void UsartTransMax8bits (unsigned char data);
 
+  /**
+   * @description USART transmition 9 bits 
+   *
+   * @param  unsigned int
+   * @return void
+   */
+  void UsartTransMax8bits (unsigned int data);
+
 #endif
