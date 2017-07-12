@@ -25,6 +25,14 @@
    * @param  void
    * @return void
    */
-  void UartInit(void);
+  void UartInit (void);
+
+  /**
+   * @description USART transmition max 8 bits 
+   *
+   * @param  unsigned char
+   * @return void
+   */
+  void UsartTransMax8bits (unsigned char data);
 
 #endif
