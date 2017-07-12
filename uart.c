@@ -39,7 +39,7 @@ void UsartInit (void)
 }
 
 /**
- * @description USART transmition 8 bits max
+ * @description USART max transmition 8 bits
  *
  * @param  unsigned char
  * @return void
@@ -52,7 +52,7 @@ void UsartTransMax8bits (unsigned char data)
   UDR = data;
 }
          
-         /**
+/**
  * @description USART transmition 9 bits
  *
  * @param  unsigned int
@@ -71,4 +71,39 @@ void UsartTrans9bits (unsigned int data)
   }
   // write data to Usart transmitter register
   UDR = data;
+}
+         
+/**
+ * @description USART received max 8 bits
+ *
+ * @param  void
+ * @return unsigned char
+ */
+void UsartReceiveMax8bits (void)
+{
+  // wait for transmit buffer empty
+  while ((UCSRA & (1 << RXC) == 0);
+  // write data to Usart transmitter register
+  retrun UDR;
+}
+
+/**
+ * @description USART receive 9 bits
+ *
+ * @param  unsigned int
+ * @return void
+ */
+void UsartTrans9bits (unsigned int data)
+{
+  // init return value
+  unsigned int data = 0x00;
+  // wait for transmit buffer empty
+  while ((UCSRA & (1 << RXC) == 0);
+  // check if 9th bit is set
+  if (UCSRB & (1 << RXB8)) {
+    // write 9th bit
+    data = 0x0100;
+  }
+  // write data to Usart transmitter register
+  return (data | UDR);
 }
