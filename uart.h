@@ -41,6 +41,6 @@
    * @param  unsigned int
    * @return void
    */
-  void UsartTransMax8bits (unsigned int data);
+  void UsartTrans9bits (unsigned int data);
 
 #endif
