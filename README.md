@@ -1,2 +1,2 @@
 # USART
-UART communication Atmega16
+USART communication Atmega16
