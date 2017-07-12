@@ -43,4 +43,20 @@
    */
   void UsartTrans9bits (unsigned int data);
 
+  /**
+   * @description USART received max 8 bits
+   *
+   * @param  void
+   * @return unsigned char
+   */
+  unsigned char UsartReceiveMax8bits (void);
+
+  /**
+   * @description USART receive 9 bits
+   *
+   * @param  void
+   * @return unsigned int
+   */
+  unsigned int UsartTrans9bits (void);
+
 #endif
