@@ -29,7 +29,7 @@ int main(void)
   char val;
   char str[4];
   // init usart
-  UsartInit(BR_9600, FRAME_8BITS, PARITY_EVEN, STOPBIT_1);
+  UsartInit(BR_9600, DATA_8, PARITY_EVEN, STOPBITS_1);
   // init screen
   St7735Init();
   // clear screen
