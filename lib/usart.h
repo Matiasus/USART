@@ -47,7 +47,7 @@
     DATA_8 = 0x06,
     // 9 bits
     DATA_9 = 0x43
-  } E_bits;
+  } E_bitsframe;
 
   /** @enum parity - none, even, odd */
   typedef enum {
