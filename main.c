@@ -8,7 +8,7 @@
  * @datum       12.07.2017
  * @file        main.c
  * @tested      AVR Atmega16
- * @inspiration http://www.displayfuture.com/Display/datasheet/controller/ST7735.pdf
+ * @inspiration 
  * ----------------------------------------------------------------------------------
  */
 #include <avr/interrupt.h>
@@ -25,11 +25,10 @@
  */
 int main(void)
 {
-  char i = 64;
-  //char val = 0x00;
-  char str[4];
+  char i = 0;
+  char val;
   // init usart
-  UsartInit();
+  UsartInit(BR_38400, DATA_8, PARITY_ODD, STOPBITS_1);
   // init screen
   St7735Init();
   // clear screen
@@ -37,33 +36,29 @@ int main(void)
   // set text position
   SetPosition(5, 10);
   // draw text
-  DrawString("UBRRH ", 0xffff, X2);
-  // zapis do retazca
-  sprintf(str,"%d UBRRL ", UBRRH);
-  // draw text
-  DrawString(str, 0xffff, X2);
-  // zapis do retazca
-  sprintf(str,"%d", UBRRL);
-  // draw text
-  DrawString(str, 0xffff, X2);
-  // zobrazenie 
+  DrawString("Usart initialise... ", 0xffff, X1);
+  // show RAM content of display
   UpdateScreen();
   // set text position
-  SetPosition(5, 30);
+  SetPosition(5, 25);
   // loop sending chars
-  while (i++ < 68) {
-    // zapis do retazca
-    sprintf(str,"%d ", UsartReceiveMax8bits());
-    // draw text
-    DrawString(str, 0xffff, X1);
-    // zobrazenie 
+  while (i++ < 26) {
+    // get value
+    val = UsartReceive();
+    // draw char
+    DrawChar(val, 0xffff, X1);
+    // set text position
+    SetPosition(5 + 6*i, 25);
+    // send back received value
+    UsartTransmit(val);
+    // show RAM content of display
     UpdateScreen();
   }
   // set text position
-  SetPosition(5, 50);
+  SetPosition(5, 40);
   // draw text
-  DrawString("USART END", 0xffff, X2);
-  // zobrazenie 
+  DrawString("Usart end communication...", 0xffff, X1);
+  // show RAM content of display 
   UpdateScreen();
   // return & exit
   return 0;
