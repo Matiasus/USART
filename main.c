@@ -27,9 +27,8 @@ int main(void)
 {
   char i = 0;
   char val;
-  char str[4];
   // init usart
-  UsartInit(BR_9600, DATA_8, PARITY_EVEN, STOPBITS_1);
+  UsartInit(BR_38400, DATA_8, PARITY_ODD, STOPBITS_1);
   // init screen
   St7735Init();
   // clear screen
@@ -37,36 +36,28 @@ int main(void)
   // set text position
   SetPosition(5, 10);
   // draw text
-  DrawString("UBRRH ", 0xffff, X2);
-  // zapis do retazca
-  sprintf(str,"%d UBRRL ", UBRRH);
-  // draw text
-  DrawString(str, 0xffff, X2);
-  // zapis do retazca
-  sprintf(str,"%d", UBRRL);
-  // draw text
-  DrawString(str, 0xffff, X2);
+  DrawString("Usart initialise... ", 0xffff, X1);
   // show RAM content of display
   UpdateScreen();
   // set text position
-  SetPosition(5, 30);
+  SetPosition(5, 25);
   // loop sending chars
-  while (i++ < 10) {
+  while (i++ < 26) {
     // get value
     val = UsartReceive();
-    // write to string
-    sprintf(str,"%d ", val);
-    // draw text
-    DrawString(str, 0xffff, X1);
+    // draw char
+    DrawChar(val, 0xffff, X1);
+    // set text position
+    SetPosition(5 + 6*i, 25);
     // send back received value
     UsartTransmit(val);
     // show RAM content of display
     UpdateScreen();
   }
   // set text position
-  SetPosition(5, 50);
+  SetPosition(5, 40);
   // draw text
-  DrawString("USART END", 0xffff, X1);
+  DrawString("Usart end communication...", 0xffff, X1);
   // show RAM content of display 
   UpdateScreen();
   // return & exit
