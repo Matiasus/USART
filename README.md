@@ -2,16 +2,16 @@
 <p>
 C library for USART communication of AVR microcontroller Atmega16. Support 7 preddefined baudrates with the smallest baud rate error (-0.1% to 0.2%) for 16 Mhz clock frequency.
 </p>
-<h2>Enum types defined</h2>
+<h2>Enum types</h2>
 <p>
-Initialisation of USART communitaion is done with four enum types definition:
+Initialisation of USART communitaion is done by UsartInit (E_baudrate, E_bits, E_parity, E_stopbit) function where must be select four mandatory variables selected from defined enum types:
 <ul>
-  <li><b>E_baudrate</b></li>
-  <li><b>E_framebits</b></li>
-  <li><b>E_parity</b></li>
-  <li><b>E_stopbits</b></li>  
+  <li><b>E_baudrate</b> - set baudrate</li>
+  <li><b>E_framebits</b> - set data frame format</li>
+  <li><b>E_parity</b> - set parity</li>
+  <li><b>E_stopbits</b> - set number of stop bits</li>  
 </ul>
-Detailed information about every enum types and values are described in next section with comments.
+Detailed information about every enum types and values are described in the next section.
 </p>
 <p>
 Baudrate enum types calculate UBRR value for selected baudrate. There can be added more baudrates as neccessary. The defined baudrates were selected with respect to the smallest calculating baud rate error for 16 Mhz frequency. 
