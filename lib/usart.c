@@ -34,14 +34,14 @@ void UsartInit (E_baudrate baudrate, E_bits bits, E_parity parity, E_stopbit sto
   // Enable receiving and transmitting
   UCSRB = (1 << RXEN) 
         | (1 << TXEN);
-  // write to register UCSRC
-  UCSRC = (1 << URSEL) | (bits & 0x0f) | parity | stopbit;
   // check if selected 9 bits frame
   // high byte of "bits" carry information if 9 bits frame selected
   if (bits & 0x40) {
     // set for 9 bits frame
     UCSRB |= (1 << UCSZ2);
   }
+  // write to register UCSRC
+  UCSRC = (1 << URSEL) | (bits & 0x0f) | parity | stopbit;
 }
 
 /**
@@ -85,7 +85,7 @@ unsigned int UsartReceive (void)
   ucsra = UCSRA;
   // store UCSRB register
   ucsrb = UCSRB;
-  // check erro flags
+  // check error flags
   if (ucsra & ((1 << PE) | (1 << DOR) | (1 << FE))) {
     // error occur
     return -1;
