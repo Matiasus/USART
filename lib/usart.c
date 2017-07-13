@@ -14,31 +14,34 @@
 #include <stdio.h>
 #include <avr/io.h>
 #include "usart.h"
+
 /**
- * @description Initialise USART communication
- *
- * @param  void
+ * @description Init UART
+ * 
+ * @param  Enum E_baudrate
+ * @param  Enum E_bits
+ * @param  Enum E_parity
+ * @param  Enum E_stopbit   
  * @return void
  */
-void UsartInit (void)
+void UsartInit (E_baudrate baudrate, E_bits bits, E_parity parity, E_stopbit stopbit)
 {
   // definition of baud rate - speed of transmition
   // write high byte 
-  UBRRH = (unsigned char) ((BAUDRATE) >> 8);
-  //UBRRH = 0x00;
+  UBRRH = (unsigned char) ((baudrate) >> 8);
   // write low byte
-  UBRRL = (unsigned char) BAUDRATE;
-  //UBRRL = 0x67;
+  UBRRL = (unsigned char) baudrate;
   // Enable receiving and transmitting
   UCSRB = (1 << RXEN) 
         | (1 << TXEN);
-  // asynchronous operation
-  // with frame format 8 bits, even parity, 2 stop bits 
-  UCSRC = (1 << URSEL)  // select USCRC register
-        | (1 << UCSZ0)  // 8 bits data
-        | (1 << UCSZ1)  //   -||- -||-
-        | (1 << UPM1)   // even parity
-        | (1 << USBS);  // 2 stop bits
+  // write to register UCSRC
+  UCSRC = (1 << URSEL) | (bits & 0x0f) | parity | stopbit;
+  // check if selected 9 bits frame
+  // high byte of "bits" carry information if 9 bits frame selected
+  if (bits & 0x40) {
+    // set for 9 bits frame
+    UCSRB |= (1 << UCSZ2);
+  }
 }
 
 /**
