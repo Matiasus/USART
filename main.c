@@ -25,7 +25,7 @@
  */
 int main(void)
 {
-  char i = 64;
+  char i = 0;
   char val;
   char str[4];
   // init usart
@@ -51,7 +51,7 @@ int main(void)
   // set text position
   SetPosition(5, 30);
   // loop sending chars
-  while (i++ < 68) {
+  while (i++ < 10) {
     // get value
     val = UsartReceive();
     // write to string
