@@ -47,7 +47,7 @@
     DATA_8 = 0x06,
     // 9 bits
     DATA_9 = 0x43
-  } E_bitsframe;
+  } E_framebits;
 
   /** @enum parity - none, even, odd */
   typedef enum {
@@ -65,7 +65,7 @@
     STOPBITS_1 = 0x00,
     // 2 stop bits
     STOPBITS_2 = 0x20
-  } E_stopbit;
+  } E_stopbits;
 
   /**
    * @description Init UART
