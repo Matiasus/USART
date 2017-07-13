@@ -28,35 +28,27 @@
   void UsartInit (void);
 
   /**
-   * @description USART transmition max 8 bits 
-   *
-   * @param  unsigned char
-   * @return void
-   */
-  void UsartTransMax8bits (unsigned char data);
-
-  /**
-   * @description USART transmition 9 bits 
+   * @description USART transmit data
    *
    * @param  unsigned int
    * @return void
    */
-  void UsartTrans9bits (unsigned int data);
+  void UsartTransmit (unsigned int);
 
   /**
-   * @description USART received max 8 bits
-   *
-   * @param  void
-   * @return unsigned char
-   */
-  unsigned char UsartReceiveMax8bits (void);
-
-  /**
-   * @description USART receive 9 bits
+   * @description USART receive data
    *
    * @param  void
    * @return unsigned int
    */
-  unsigned int UsartReceive9bits (void);
+  unsigned int UsartReceive (void);
+
+  /**
+   * @description Flush buffered data in receive buffer
+   *
+   * @param  void
+   * @return void
+   */
+  void UsartFlush (void);
 
 #endif
