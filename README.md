@@ -79,5 +79,3 @@ typedef enum {
   STOPBITS_2 = 0x20
 } E_stopbits;
 </pre>
-<h2>Function description</h2>
-
