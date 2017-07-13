@@ -11,21 +11,72 @@
  * @inspiration
  * ---------------------------------------------------
  */
- 
 #ifndef __USART_H__
 #define __USART_H__
 
   #define F_CPU 16000000
-  #define BAUD 9600
-  #define BAUDRATE ((F_CPU)/(BAUD*16UL)-1)
+  #define _UBRR(BAUD) ((F_CPU)/(BAUD*16UL)-1)
+
+  /** @enum UBRR values for different values */
+  typedef enum {
+    // baudrate  2400 / Error = -0.1% at 16Mhz
+    BR_2400 = _UBRR(2400),
+    // baudrate  4800 / Error =  0.2% at 16Mhz
+    BR_4800 = _UBRR(4800),
+    // baudrate  9600 / Error =  0.2% at 16Mhz
+    BR_9600 = _UBRR(9600),
+    // baudrate  19200 / Error = 0.2% at 16Mhz
+    BR_19200 = _UBRR(19200),
+    // baudrate  38400 / Error = 0.2% at 16Mhz
+    BR_38400 = _UBRR(38400),
+    // baudrate  76800 / Error = 0.2% at 16Mhz
+    BR_76800 = _UBRR(76800),
+    // baudrate 250000 / Error = 0.0% at 16Mhz
+    BR_250000 = _UBRR(250000),
+  } E_baudrate;
+
+  /** @enum number of bits - 5, 6, 7, 8, 9 */
+  typedef enum {
+    // 5 bits
+    BIT_5 = 0x00,
+    // 6 bits
+    BIT_6 = 0x02,
+    // 7 bits
+    BIT_7 = 0x04,
+    // 8 bits
+    BIT_8 = 0x06,
+    // 9 bits
+    BIT_9 = 0x43
+  } E_bits;
+
+  /** @enum parity - none, even, odd */
+  typedef enum {
+    // none
+    NONE = 0x00,
+    // even
+    EVEN = 0x20,
+    // odd
+    ODD  = 0x30
+  } E_parity;
+
+  /** @enum stop bits - 1, 2 */
+  typedef enum {
+    // 1 stop bit
+    STOP_1 = 0x00,
+    // 2 stop bits
+    STOP_2 = 0x20
+  } E_stopbit;
 
   /**
    * @description Init UART
    * 
-   * @param  void
+   * @param  Enum E_baudrate
+   * @param  Enum E_bits
+   * @param  Enum E_parity
+   * @param  Enum E_stopbit   
    * @return void
    */
-  void UsartInit (void);
+  void UsartInit (E_baudrate, E_bits, E_parity, E_stopbit);
 
   /**
    * @description USART transmit data
