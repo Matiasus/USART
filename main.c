@@ -8,7 +8,7 @@
  * @datum       12.07.2017
  * @file        main.c
  * @tested      AVR Atmega16
- * @inspiration http://www.displayfuture.com/Display/datasheet/controller/ST7735.pdf
+ * @inspiration 
  * ----------------------------------------------------------------------------------
  */
 #include <avr/interrupt.h>
