@@ -44,7 +44,7 @@
   unsigned int UsartReceive (void);
 
   /**
-   * @description Flush buffered data in receive buffer
+   * @description Flush buffered data from receive buffer
    *
    * @param  void
    * @return void
