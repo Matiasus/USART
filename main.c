@@ -26,7 +26,7 @@
 int main(void)
 {
   char i = 64;
-  //char val = 0x00;
+  char val;
   char str[4];
   // init usart
   UsartInit();
@@ -46,24 +46,28 @@ int main(void)
   sprintf(str,"%d", UBRRL);
   // draw text
   DrawString(str, 0xffff, X2);
-  // zobrazenie 
+  // show RAM content of display
   UpdateScreen();
   // set text position
   SetPosition(5, 30);
   // loop sending chars
   while (i++ < 68) {
-    // zapis do retazca
-    sprintf(str,"%d ", UsartReceiveMax8bits());
+    // get value
+    val = UsartReceive();
+    // write to string
+    sprintf(str,"%d ", val);
     // draw text
     DrawString(str, 0xffff, X1);
-    // zobrazenie 
+    // send back received value
+    UsartTransmit(val);
+    // show RAM content of display
     UpdateScreen();
   }
   // set text position
   SetPosition(5, 50);
   // draw text
-  DrawString("USART END", 0xffff, X2);
-  // zobrazenie 
+  DrawString("USART END", 0xffff, X1);
+  // show RAM content of display 
   UpdateScreen();
   // return & exit
   return 0;
