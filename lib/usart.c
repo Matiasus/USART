@@ -24,7 +24,7 @@
  * @param  Enum E_stopbit   
  * @return void
  */
-void UsartInit (E_baudrate baudrate, E_bits bits, E_parity parity, E_stopbit stopbit)
+void UsartInit (E_baudrate baudrate, E_framebits framebits, E_parity parity, E_stopbits stopbits)
 {
   // definition of baud rate - speed of transmition
   // write high byte 
@@ -36,12 +36,12 @@ void UsartInit (E_baudrate baudrate, E_bits bits, E_parity parity, E_stopbit sto
         | (1 << TXEN);
   // check if selected 9 bits frame
   // high byte of "bits" carry information if 9 bits frame selected
-  if (bits & 0x40) {
+  if (framebits & 0x40) {
     // set for 9 bits frame
     UCSRB |= (1 << UCSZ2);
   }
   // write to register UCSRC
-  UCSRC = (1 << URSEL) | (bits & 0x0f) | parity | stopbit;
+  UCSRC = (1 << URSEL) | (framebits & 0x0f) | parity | stopbits;
 }
 
 /**
