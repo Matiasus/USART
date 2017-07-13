@@ -38,33 +38,33 @@
   /** @enum number of bits - 5, 6, 7, 8, 9 */
   typedef enum {
     // 5 bits
-    BIT_5 = 0x00,
+    DATA_5 = 0x00,
     // 6 bits
-    BIT_6 = 0x02,
+    DATA_6 = 0x02,
     // 7 bits
-    BIT_7 = 0x04,
+    DATA_7 = 0x04,
     // 8 bits
-    BIT_8 = 0x06,
+    DATA_8 = 0x06,
     // 9 bits
-    BIT_9 = 0x43
+    DATA_9 = 0x43
   } E_bits;
 
   /** @enum parity - none, even, odd */
   typedef enum {
     // none
-    NONE = 0x00,
+    PARITY_NONE = 0x00,
     // even
-    EVEN = 0x20,
+    PARITY_EVEN = 0x20,
     // odd
-    ODD  = 0x30
+    PARITY_ODD  = 0x30
   } E_parity;
 
   /** @enum stop bits - 1, 2 */
   typedef enum {
     // 1 stop bit
-    STOP_1 = 0x00,
+    STOPBITS_1 = 0x00,
     // 2 stop bits
-    STOP_2 = 0x20
+    STOPBITS_2 = 0x20
   } E_stopbit;
 
   /**
