@@ -315,7 +315,7 @@
 
   /**
    * @description     Delay
-   *l
+   * 
    * @param uint8_t   delay in milliseconds
    * @return void
    */

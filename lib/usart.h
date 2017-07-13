@@ -98,8 +98,8 @@
    * @description Flush buffered data from receive buffer
    *
    * @param  void
-   * @return void
+   * @return unsigned char
    */
-  void UsartFlush (void);
+  unsigned char UsartFlush (void);
 
 #endif
