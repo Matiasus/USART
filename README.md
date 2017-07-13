@@ -11,7 +11,11 @@ Initialisation of USART communitaion is done with four enum types definition:
   <li><b>E_parity</b></li>
   <li><b>E_stopbits</b></li>  
 </ul>
-Detailed information about every enum types and values are described in next section.
+Detailed information about every enum types and values are described in next section with comments.
+</p>
+<p>
+Baudrate enum types calculate UBRR value for selected baudrate. There can be added more baudrates as neccessary. The defined baudrates were selected with respect to the smallest calculating baud rate error for 16 Mhz frequency. 
+</p>
 <pre>
 typedef enum {
   // baudrate  2400 / Error = -0.1% at 16Mhz
@@ -30,6 +34,23 @@ typedef enum {
   BR_250000 = _UBRR(250000),
 } E_baudrate;
 </pre>
+<p>
+Framebits enum type defines frame format - number of transmitted and received data bits. Admissible values are 5, 6, 7, 8 and 9 bits
 </p>
+<pre>
+  /** @enum number of bits - 5, 6, 7, 8, 9 */
+  typedef enum {
+    // 5 bits
+    DATA_5 = 0x00,
+    // 6 bits
+    DATA_6 = 0x02,
+    // 7 bits
+    DATA_7 = 0x04,
+    // 8 bits
+    DATA_8 = 0x06,
+    // 9 bits
+    DATA_9 = 0x43
+  } E_framebits;
+</pre>
 <h2>Function description</h2>
 
