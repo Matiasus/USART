@@ -14,8 +14,8 @@
 #ifndef __USART_H__
 #define __USART_H__
 
-  #define F_CPU 16000000
-  #define _UBRR(BAUD) ((F_CPU)/(BAUD*16UL)-1)
+  #define _FCPU 16000000
+  #define _UBRR(BAUD) ((_FCPU)/(BAUD*16UL)-1)
 
   /** @enum UBRR values for different values */
   typedef enum {
