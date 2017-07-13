@@ -4,10 +4,10 @@
  * Copyright (C) 2016 Marian Hrinko.
  * Written by Marian Hrinko (mato.hrinko@gmail.com)
  *
- * @author      Marian Hrinko
- * @datum       11.07.2017
- * @file        usart.c
- * @tested      AVR Atmega16
+ * @author        Marian Hrinko
+ * @datum         11.07.2017
+ * @file          usart.c
+ * @tested        AVR Atmega16
  * @inspiration
  * ---------------------------------------------------
  */
