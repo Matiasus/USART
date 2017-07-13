@@ -76,7 +76,7 @@
    * @param  Enum E_stopbit   
    * @return void
    */
-  void UsartInit (E_baudrate, E_bits, E_parity, E_stopbit);
+  void UsartInit (E_baudrate, E_framebits, E_parity, E_stopbits);
 
   /**
    * @description USART transmit data
