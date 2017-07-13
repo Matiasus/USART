@@ -54,7 +54,7 @@ typedef enum {
 } E_framebits;
 </pre>
 <p>
-Parity enum type defines parity. Parity could be disable or enable which means even or odd parity.
+Parity enum type defines parity of data frame. Allowable values are disable parity, even parity - add one if the number of ones in data data frame is odd, and odd parity - add one if number of ones in data frame is even.
 </p>
 <pre>
 /** @enum parity - none, even, odd */
@@ -66,6 +66,18 @@ typedef enum {
   // odd
   PARITY_ODD  = 0x30
 } E_parity;
+</pre>
+<p>
+The last mandatory parameter in init function for USART communication is number of stop bits. There are two allowable values - 1 stop bit, 2 stop bits.
+</p>
+<pre>
+/** @enum stop bits - 1, 2 */
+typedef enum {
+  // 1 stop bit
+  STOPBITS_1 = 0x00,
+  // 2 stop bits
+  STOPBITS_2 = 0x20
+} E_stopbits;
 </pre>
 <h2>Function description</h2>
 
