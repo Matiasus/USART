@@ -94,18 +94,18 @@ unsigned int UsartReceive (void)
 }
 
 /**
- * @description USART empty buffered data in receive buffer
+ * @description Flush buffered data from receive buffer
  *
  * @param  void
- * @return unsigned int
+ * @return void
  */
-unsigned int UsartFlush (void)
+void UsartFlush (void)
 {
   // data to flush
   unsigned char garbage;
   // wait till receive complete
   while (UCSRA & (1 << RXC)) {
-    // flush the content of data register
+    // flush the content of receive buffer
     garbage = UDR;
   }
 }
