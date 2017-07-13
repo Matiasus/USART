@@ -4,7 +4,7 @@ C library for USART communication of AVR microcontroller Atmega16. Support 7 pre
 </p>
 <h2>Enum types</h2>
 <p>
-Initialisation of USART communitaion is done by function <i><b>UsartInit(E_baudrate, E_bits, E_parity, E_stopbit)</b></i> with four mandatory parameters:
+Initialisation of USART communitaion is done by function <i><b>UsartInit(</b>E_baudrate, E_bits, E_parity, E_stopbit<b>)</b></i> with four mandatory parameters:
 <ul>
   <li><b>E_baudrate</b> - set baudrate</li>
   <li><b>E_framebits</b> - set data frame format</li>
