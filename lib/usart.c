@@ -42,26 +42,12 @@ void UsartInit (void)
 }
 
 /**
- * @description USART max transmition 8 bits
- *
- * @param  unsigned char
- * @return void
- */
-void UsartTransMax8bits (unsigned char data)
-{
-  // wait for transmit buffer empty
-  while ((UCSRA & (1 << UDRE)) == 0);
-  // write data to Usart transmitter register
-  UDR = data;
-}
-         
-/**
- * @description USART transmition 9 bits
+ * @description USART transmit data
  *
  * @param  unsigned int
  * @return void
  */
-void UsartTrans9bits (unsigned int data)
+void UsartTransmit (unsigned int data)
 {
   // wait for transmit buffer empty
   while ((UCSRA & (1 << UDRE)) == 0);
@@ -77,26 +63,12 @@ void UsartTrans9bits (unsigned int data)
 }
          
 /**
- * @description USART received max 8 bits
- *
- * @param  void
- * @return unsigned char
- */
-unsigned char UsartReceiveMax8bits (void)
-{
-  // wait for transmit buffer empty
-  while ((UCSRA & (1 << RXC)) == 0);
-  // write data to Usart transmitter register
-  return UDR;
-}
-
-/**
- * @description USART receive 9 bits
+ * @description USART receive data
  *
  * @param  void
  * @return unsigned int
  */
-unsigned int UsartReceive9bits (void)
+unsigned int UsartReceive (void)
 {
   // store uscra
   unsigned char ucsra;
@@ -119,4 +91,21 @@ unsigned int UsartReceive9bits (void)
   result = ucsrb & (1 << RXB8);
   // return all 9 bits
   return ((result >> 1) | UDR);
+}
+
+/**
+ * @description USART empty buffered data in receive buffer
+ *
+ * @param  void
+ * @return unsigned int
+ */
+unsigned int UsartFlush (void)
+{
+  // data to flush
+  unsigned char garbage;
+  // wait till receive complete
+  while (UCSRA & (1 << RXC)) {
+    // flush the content of data register
+    garbage = UDR;
+  }
 }
