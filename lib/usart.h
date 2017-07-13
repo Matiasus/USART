@@ -32,7 +32,7 @@
     // baudrate  76800 / Error = 0.2% at 16Mhz
     BR_76800 = _UBRR(76800),
     // baudrate 250000 / Error = 0.0% at 16Mhz
-    BR_250000 = _UBRR(250000),
+    BR_250000 = _UBRR(250000)
   } E_baudrate;
 
   /** @enum number of bits - 5, 6, 7, 8, 9 */
