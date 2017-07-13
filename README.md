@@ -17,6 +17,7 @@ Detailed information about every enum types and values are described in next sec
 Baudrate enum types calculate UBRR value for selected baudrate. There can be added more baudrates as neccessary. The defined baudrates were selected with respect to the smallest calculating baud rate error for 16 Mhz frequency. 
 </p>
 <pre>
+/** @enum UBRR values for different values */
 typedef enum {
   // baudrate  2400 / Error = -0.1% at 16Mhz
   BR_2400 = _UBRR(2400),
@@ -38,19 +39,33 @@ typedef enum {
 Framebits enum type defines frame format - number of transmitted and received data bits. Admissible values are 5, 6, 7, 8 and 9 bits
 </p>
 <pre>
-  /** @enum number of bits - 5, 6, 7, 8, 9 */
-  typedef enum {
-    // 5 bits
-    DATA_5 = 0x00,
-    // 6 bits
-    DATA_6 = 0x02,
-    // 7 bits
-    DATA_7 = 0x04,
-    // 8 bits
-    DATA_8 = 0x06,
-    // 9 bits
-    DATA_9 = 0x43
-  } E_framebits;
+/** @enum number of bits - 5, 6, 7, 8, 9 */
+typedef enum {
+  // 5 bits
+  DATA_5 = 0x00,
+  // 6 bits
+  DATA_6 = 0x02,
+  // 7 bits
+  DATA_7 = 0x04,
+  // 8 bits
+  DATA_8 = 0x06,
+  // 9 bits
+  DATA_9 = 0x43
+} E_framebits;
+</pre>
+<p>
+Parity enum type defines parity. Parity could be disable or enable which means even or odd parity.
+</p>
+<pre>
+/** @enum parity - none, even, odd */
+typedef enum {
+  // none
+  PARITY_NONE = 0x00,
+  // even
+  PARITY_EVEN = 0x20,
+  // odd
+  PARITY_ODD  = 0x30
+} E_parity;
 </pre>
 <h2>Function description</h2>
 
