@@ -17,6 +17,16 @@
   #define _FCPU 16000000
   #define _UBRR(BAUD) ((_FCPU)/(BAUD*16UL)-1)
 
+  #if defined(__AVR_ATMEGA8__) || defined(__AVR_ATMEGA16__)
+  
+    #define USART_UBRRH
+    #define USART_UBRRL
+    #define USART_UCSRA
+    #define USART_UCSRB
+    #define USART_UCSRC
+  
+  #endif
+
   /** @enum UBRR values for different values */
   typedef enum {
     // baudrate  2400 / Error = -0.1% at 16Mhz
