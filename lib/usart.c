@@ -28,20 +28,19 @@ void UsartInit (E_baudrate baudrate, E_framebits framebits, E_parity parity, E_s
 {
   // definition of baud rate - speed of transmition
   // write high byte 
-  UBRRH = (unsigned char) ((baudrate) >> 8);
+  USART_UBRRH = (unsigned char) ((baudrate) >> 8);
   // write low byte
-  UBRRL = (unsigned char) baudrate;
+  USART_UBRRL = (unsigned char) baudrate;
   // Enable receiving and transmitting
-  UCSRB = (1 << RXEN) 
-        | (1 << TXEN);
+  USART_UCSRB = (1 << RXEN) | (1 << TXEN);
   // check if selected 9 bits frame
   // high byte of "bits" carry information if 9 bits frame selected
   if (framebits & 0x40) {
     // set for 9 bits frame
-    UCSRB |= (1 << UCSZ2);
+    USART_UCSRB |= (1 << UCSZ2);
   }
   // write to register UCSRC
-  UCSRC = (1 << URSEL) | (framebits & 0x0f) | parity | stopbits;
+  USART_UCSRC = (1 << URSEL) | (framebits & 0x0f) | parity | stopbits;
 }
 
 /**
@@ -53,16 +52,16 @@ void UsartInit (E_baudrate baudrate, E_framebits framebits, E_parity parity, E_s
 void UsartTransmit (unsigned int data)
 {
   // wait for transmit buffer empty
-  while ((UCSRA & (1 << UDRE)) == 0);
+  while ((USART_UCSRA & (1 << UDRE)) == 0);
   // clear 8th bit
-  UCSRB &= ~(1 << TXB8);
+  USART_UCSRB &= ~(1 << TXB8);
   // check if 9th bit is set
   if (data & 0x0100) {
     // write 9th bit
-    UCSRB |= (1 << TXB8);
+    USART_UCSRB |= (1 << TXB8);
   }
   // write data to Usart transmitter register
-  UDR = data;
+  USART_UDR = data;
 }
          
 /**
@@ -80,11 +79,11 @@ unsigned int UsartReceive (void)
   // init return value
   unsigned int result = 0x00;
   // wait for transmit buffer empty
-  while ((UCSRA & (1 << RXC)) == 0);
+  while ((USART_UCSRA & (1 << RXC)) == 0);
   // store UCSRA register
-  ucsra = UCSRA;
+  ucsra = USART_UCSRA;
   // store UCSRB register
-  ucsrb = UCSRB;
+  ucsrb = USART_UCSRB;
   // check error flags
   if (ucsra & ((1 << PE) | (1 << DOR) | (1 << FE))) {
     // error occur
@@ -93,7 +92,7 @@ unsigned int UsartReceive (void)
   // write 9th bit
   result = ucsrb & (1 << RXB8);
   // return all 9 bits
-  return ((result >> 1) | UDR);
+  return ((result >> 1) | USART_UDR);
 }
 
 /**
@@ -105,7 +104,7 @@ unsigned int UsartReceive (void)
 unsigned char UsartFlush (void)
 {
   // wait till receive complete
-  while (UCSRA & (1 << RXC));
+  while (USART_UCSRA & (1 << RXC));
   // flush the content of receive buffer
-  return UDR;
+  return USART_UDR;
 }
