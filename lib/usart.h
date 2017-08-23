@@ -19,11 +19,12 @@
 
   #if defined(__AVR_ATMEGA8__) || defined(__AVR_ATMEGA16__)
   
-    #define USART_UBRRH
-    #define USART_UBRRL
-    #define USART_UCSRA
-    #define USART_UCSRB
-    #define USART_UCSRC
+    #define USART_UBRRH UBRRH
+    #define USART_UBRRL UBRRL
+    #define USART_UCSRA UCSRA
+    #define USART_UCSRB UCSRB
+    #define USART_UCSRC UCSRC
+    #define USART_UDR   UDR
   
   #endif
 
