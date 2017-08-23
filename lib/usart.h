@@ -14,18 +14,22 @@
 #ifndef __USART_H__
 #define __USART_H__
 
-  #define _FCPU 16000000
+  // define clock
+  #if defined(__AVR_ATMEGA8__)
+    #define _FCPU 8000000
+  #elif defined(__AVR_ATMEGA16__)
+    #define _FCPU 16000000
+  #endif
+  // UBRR value
   #define _UBRR(BAUD) ((_FCPU)/(BAUD*16UL)-1)
-
-  #if defined(__AVR_ATMEGA8__) || defined(__AVR_ATMEGA16__)
-  
+  // define register for uart/usart communication
+  #if defined(__AVR_ATMEGA8__) || defined(__AVR_ATMEGA16__) 
     #define USART_UBRRH UBRRH
     #define USART_UBRRL UBRRL
     #define USART_UCSRA UCSRA
     #define USART_UCSRB UCSRB
     #define USART_UCSRC UCSRC
     #define USART_UDR   UDR
-  
   #endif
 
   /** @enum UBRR values for different values */
