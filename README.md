@@ -5,10 +5,10 @@ C library for USART communication of AVR microcontroller Atmega16. Support 7 pre
 ## Enum types
 
 Initialisation of USART communitaion is done by function <i><b>UsartInit()</b></i> with four mandatory parameters:
-- [E_baudrate](#Baudrate) - set baudrate
-- [E_framebits](#Framebits) - set data frame format
-- [E_parity](#Paritybits) - set parity
-- [E_stopbits](#Stopbits) - set number of stop bits
+- [E_baudrate](#baudrate) - set baudrate
+- [E_framebits](#framebits) - set data frame format
+- [E_parity](#paritybits) - set parity
+- [E_stopbits](#stopbits) - set number of stop bits
 
 Detailed information about every enum types and values are described in the next section.
 ### Baudrate
