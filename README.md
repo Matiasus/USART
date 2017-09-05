@@ -1,22 +1,19 @@
-<h1>C USART Library for Atmega16</h1>
-<p>
+# C USART Library for Atmega16
+
 C library for USART communication of AVR microcontroller Atmega16. Support 7 preddefined baudrates with the smallest baud rate error (-0.1% to 0.2%) for 16 Mhz clock frequency.
-</p>
-<h2>Enum types</h2>
-<p>
+
+## Enum types
+
 Initialisation of USART communitaion is done by function <i><b>UsartInit()</b></i> with four mandatory parameters:
-<ul>
-  <li><b>E_baudrate</b> - set baudrate</li>
-  <li><b>E_framebits</b> - set data frame format</li>
-  <li><b>E_parity</b> - set parity</li>
-  <li><b>E_stopbits</b> - set number of stop bits</li>  
-</ul>
+- [E_baudrate](#baudrate) - set baudrate
+- [E_framebits](#framebits) - set data frame format
+- [E_parity](#paritybits) - set parity
+- [E_stopbits](#stopbits) - set number of stop bits
+
 Detailed information about every enum types and values are described in the next section.
-</p>
-<p>
+### Baudrate
 Baudrate enum types calculate UBRR value for selected baudrate. There can be added more baudrates as neccessary. The defined baudrates were selected with respect to the smallest calculating baud rate error for 16 Mhz frequency. 
-</p>
-<pre>
+```c
 /** @enum UBRR values for different values */
 typedef enum {
   // baudrate  2400 / Error = -0.1% at 16Mhz
@@ -34,11 +31,10 @@ typedef enum {
   // baudrate 250000 / Error = 0.0% at 16Mhz
   BR_250000 = _UBRR(250000),
 } E_baudrate;
-</pre>
-<p>
+```
+### Framebits
 Framebits enum type defines frame format - number of transmitted and received data bits. Admissible values are 5, 6, 7, 8 and 9 bits
-</p>
-<pre>
+```c
 /** @enum number of bits - 5, 6, 7, 8, 9 */
 typedef enum {
   // 5 bits
@@ -52,11 +48,10 @@ typedef enum {
   // 9 bits
   DATA_9 = 0x43
 } E_framebits;
-</pre>
-<p>
+```
+### Paritybits
 Parity enum type defines parity of data frame. Allowable values are disable parity, even parity - add one if the number of ones in data data frame is odd, and odd parity - add one if number of ones in data frame is even.
-</p>
-<pre>
+```c
 /** @enum parity - none, even, odd */
 typedef enum {
   // none
@@ -66,11 +61,10 @@ typedef enum {
   // odd
   PARITY_ODD  = 0x30
 } E_parity;
-</pre>
-<p>
+```
+### Stopbits
 The last mandatory parameter in init function for USART communication is number of stop bits. There are two allowable values - 1 stop bit, 2 stop bits.
-</p>
-<pre>
+```c
 /** @enum stop bits - 1, 2 */
 typedef enum {
   // 1 stop bit
@@ -78,4 +72,4 @@ typedef enum {
   // 2 stop bits
   STOPBITS_2 = 0x20
 } E_stopbits;
-</pre>
+```
