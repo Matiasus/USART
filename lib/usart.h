@@ -16,9 +16,13 @@
 
   // define clock
   #if defined(__AVR_ATMEGA8__)
-    #define _FCPU 8000000
+    #ifndef _FCPU
+      #define _FCPU 8000000
+    #endif
   #elif defined(__AVR_ATMEGA16__)
-    #define _FCPU 16000000
+    #ifndef _FCPU
+      #define _FCPU 16000000
+    #endif
   #endif
   // UBRR value
   #define _UBRR(BAUD) ((_FCPU)/(BAUD*16UL)-1)
