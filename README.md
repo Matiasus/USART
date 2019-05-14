@@ -5,10 +5,10 @@ C library for USART communication of AVR microcontroller Atmega16. Support 7 pre
 ## Enum types
 
 Initialisation of USART communitaion is done by function <i><b>UsartInit()</b></i> with four mandatory parameters:
-- [E_baudrate](#baudrate) - set baudrate
-- [E_framebits](#framebits) - set data frame format
-- [E_parity](#paritybits) - set parity
-- [E_stopbits](#stopbits) - set number of stop bits
+- [EBaudrate](#baudrate) - set baudrate
+- [EFramebits](#framebits) - set data frame format
+- [EParity](#paritybits) - set parity
+- [EStopbits](#stopbits) - set number of stop bits
 
 Detailed information about every enum types and values are described in the next section.
 ### Baudrate
@@ -30,7 +30,7 @@ typedef enum {
   BR_76800 = _UBRR(76800),
   // baudrate 250000 / Error = 0.0% at 16Mhz
   BR_250000 = _UBRR(250000),
-} E_baudrate;
+} EBaudrate;
 ```
 ### Framebits
 Framebits enum type defines frame format - number of transmitted and received data bits. Admissible values are 5, 6, 7, 8 and 9 bits
@@ -47,7 +47,7 @@ typedef enum {
   DATA_8 = 0x06,
   // 9 bits
   DATA_9 = 0x43
-} E_framebits;
+} EFramebits;
 ```
 ### Paritybits
 Parity enum type defines parity of data frame. Allowable values are disable parity, even parity - add one if the number of ones in data data frame is odd, and odd parity - add one if number of ones in data frame is even.
@@ -60,7 +60,7 @@ typedef enum {
   PARITY_EVEN = 0x20,
   // odd
   PARITY_ODD  = 0x30
-} E_parity;
+} EParity;
 ```
 ### Stopbits
 The last mandatory parameter in init function for USART communication is number of stop bits. There are two allowable values - 1 stop bit, 2 stop bits.
@@ -71,5 +71,74 @@ typedef enum {
   STOPBITS_1 = 0x00,
   // 2 stop bits
   STOPBITS_2 = 0x20
-} E_stopbits;
+} EStopbits;
+```
+### Example
+Simple example receving and transmitting characters displayed on lcd screen with st7735 driver.
+```c
+/** 
+ * Example of USART
+ *
+ * Copyright (C) 2017 Marian Hrinko.
+ * Written by Marian Hrinko (mato.hrinko@gmail.com)
+ *
+ * @author      Marian Hrinko
+ * @datum       12.07.2017
+ * @file        main.c
+ * @tested      AVR Atmega16
+ * @inspiration 
+ * ----------------------------------------------------------------------------------
+ */
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdio.h>
+#include "lib/st7735.h"
+#include "lib/usart.h"
+
+/**
+ * @desc    Simple example receving and transmitting characters displayed on lcd screen with st7735 driver.
+ *
+ * @param   Void
+ * @return  Void
+ */
+int example(void)
+{
+  char i = 0;
+  char val;
+  // init usart
+  UsartInit(BR_38400, DATA_8, PARITY_ODD, STOPBITS_1);
+  // init screen
+  St7735Init();
+  // clear screen
+  ClearScreen(0x0000);
+  // set text position
+  SetPosition(5, 10);
+  // draw text
+  DrawString("Usart initialise... ", 0xffff, X1);
+  // show RAM content of display
+  UpdateScreen();
+  // set text position
+  SetPosition(5, 25);
+  // loop sending chars
+  while (i++ < 26) {
+    // get value
+    val = UsartReceive();
+    // draw char
+    DrawChar(val, 0xffff, X1);
+    // set text position
+    SetPosition(5 + 6*i, 25);
+    // send back received value
+    UsartTransmit(val);
+    // show RAM content of display
+    UpdateScreen();
+  }
+  // set text position
+  SetPosition(5, 40);
+  // draw text
+  DrawString("Usart end communication...", 0xffff, X1);
+  // show RAM content of display 
+  UpdateScreen();
+  // return & exit
+  return 0;
+}
 ```
