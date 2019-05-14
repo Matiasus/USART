@@ -52,7 +52,7 @@
     BR_76800 = _UBRR(76800),
     // baudrate 250000 / Error = 0.0% at 16Mhz
     BR_250000 = _UBRR(250000)
-  } E_baudrate;
+  } EBaudrate;
 
   /** @enum number of bits - 5, 6, 7, 8, 9 */
   typedef enum {
@@ -66,7 +66,7 @@
     DATA_8 = 0x06,
     // 9 bits
     DATA_9 = 0x43
-  } E_framebits;
+  } EFramebits;
 
   /** @enum parity - none, even, odd */
   typedef enum {
@@ -76,7 +76,7 @@
     PARITY_EVEN = 0x20,
     // odd
     PARITY_ODD  = 0x30
-  } E_parity;
+  } EParity;
 
   /** @enum stop bits - 1, 2 */
   typedef enum {
@@ -84,18 +84,18 @@
     STOPBITS_1 = 0x00,
     // 2 stop bits
     STOPBITS_2 = 0x20
-  } E_stopbits;
+  } EStopbits;
 
   /**
    * @description Init UART
    * 
-   * @param  Enum E_baudrate
-   * @param  Enum E_bits
-   * @param  Enum E_parity
-   * @param  Enum E_stopbit   
+   * @param  Enum EBaudrate
+   * @param  Enum EFramebits
+   * @param  Enum EParity
+   * @param  Enum EStopbit   
    * @return void
    */
-  void UsartInit (E_baudrate, E_framebits, E_parity, E_stopbits);
+  void UsartInit (EBaudrate, EFramebits, EParity, EStopbits);
 
   /**
    * @description USART transmit data
