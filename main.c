@@ -18,10 +18,10 @@
 #include "lib/usart.h"
 
 /**
- * @description Main function
+ * @desc    Simple example receving and transmitting characters displayed on lcd screen with st7735 driver.
  *
- * @param Void
- * @return Void
+ * @param   Void
+ * @return  Void
  */
 int main(void)
 {
