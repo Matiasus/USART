@@ -18,17 +18,17 @@
 #include "lib/usart.h"
 
 /**
- * @description Main function
+ * @desc    Simple example receving and transmitting characters displayed on lcd screen with st7735 driver.
  *
- * @param Void
- * @return Void
+ * @param   Void
+ * @return  Void
  */
 int main(void)
 {
   char i = 0;
   char val;
   // init usart
-  UsartInit(BR_38400, DATA_8, PARITY_ODD, STOPBITS_1);
+  UsartInit(eBR_38400, eDATA_8, ePARITY_ODD, eSTOPBITS_1);
   // init screen
   St7735Init();
   // clear screen

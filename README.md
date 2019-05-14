@@ -5,10 +5,10 @@ C library for USART communication of AVR microcontroller Atmega16. Support 7 pre
 ## Enum types
 
 Initialisation of USART communitaion is done by function <i><b>UsartInit()</b></i> with four mandatory parameters:
-- [E_baudrate](#baudrate) - set baudrate
-- [E_framebits](#framebits) - set data frame format
-- [E_parity](#paritybits) - set parity
-- [E_stopbits](#stopbits) - set number of stop bits
+- [EBaudrate](#baudrate) - set baudrate
+- [EFramebits](#framebits) - set data frame format
+- [EParity](#paritybits) - set parity
+- [EStopbits](#stopbits) - set number of stop bits
 
 Detailed information about every enum types and values are described in the next section.
 ### Baudrate
@@ -17,20 +17,20 @@ Baudrate enum types calculate UBRR value for selected baudrate. There can be add
 /** @enum UBRR values for different values */
 typedef enum {
   // baudrate  2400 / Error = -0.1% at 16Mhz
-  BR_2400 = _UBRR(2400),
+  eBR_2400 = _UBRR(2400),
   // baudrate  4800 / Error =  0.2% at 16Mhz
-  BR_4800 = _UBRR(4800),
+  eBR_4800 = _UBRR(4800),
   // baudrate  9600 / Error =  0.2% at 16Mhz
-  BR_9600 = _UBRR(9600),
+  eBR_9600 = _UBRR(9600),
   // baudrate  19200 / Error = 0.2% at 16Mhz
-  BR_19200 = _UBRR(19200),
+  eBR_19200 = _UBRR(19200),
   // baudrate  38400 / Error = 0.2% at 16Mhz
-  BR_38400 = _UBRR(38400),
+  eBR_38400 = _UBRR(38400),
   // baudrate  76800 / Error = 0.2% at 16Mhz
-  BR_76800 = _UBRR(76800),
+  eBR_76800 = _UBRR(76800),
   // baudrate 250000 / Error = 0.0% at 16Mhz
-  BR_250000 = _UBRR(250000),
-} E_baudrate;
+  eBR_250000 = _UBRR(250000),
+} EBaudrate;
 ```
 ### Framebits
 Framebits enum type defines frame format - number of transmitted and received data bits. Admissible values are 5, 6, 7, 8 and 9 bits
@@ -38,16 +38,16 @@ Framebits enum type defines frame format - number of transmitted and received da
 /** @enum number of bits - 5, 6, 7, 8, 9 */
 typedef enum {
   // 5 bits
-  DATA_5 = 0x00,
+  eDATA_5 = 0x00,
   // 6 bits
-  DATA_6 = 0x02,
+  eDATA_6 = 0x02,
   // 7 bits
-  DATA_7 = 0x04,
+  eDATA_7 = 0x04,
   // 8 bits
-  DATA_8 = 0x06,
+  eDATA_8 = 0x06,
   // 9 bits
-  DATA_9 = 0x43
-} E_framebits;
+  eDATA_9 = 0x43
+} EFramebits;
 ```
 ### Paritybits
 Parity enum type defines parity of data frame. Allowable values are disable parity, even parity - add one if the number of ones in data data frame is odd, and odd parity - add one if number of ones in data frame is even.
@@ -55,12 +55,12 @@ Parity enum type defines parity of data frame. Allowable values are disable pari
 /** @enum parity - none, even, odd */
 typedef enum {
   // none
-  PARITY_NONE = 0x00,
+  ePARITY_NONE = 0x00,
   // even
-  PARITY_EVEN = 0x20,
+  ePARITY_EVEN = 0x20,
   // odd
-  PARITY_ODD  = 0x30
-} E_parity;
+  ePARITY_ODD  = 0x30
+} EParity;
 ```
 ### Stopbits
 The last mandatory parameter in init function for USART communication is number of stop bits. There are two allowable values - 1 stop bit, 2 stop bits.
@@ -68,8 +68,77 @@ The last mandatory parameter in init function for USART communication is number 
 /** @enum stop bits - 1, 2 */
 typedef enum {
   // 1 stop bit
-  STOPBITS_1 = 0x00,
+  eSTOPBITS_1 = 0x00,
   // 2 stop bits
-  STOPBITS_2 = 0x20
-} E_stopbits;
+  eSTOPBITS_2 = 0x20
+} EStopbits;
+```
+### Example
+Simple example receving and transmitting characters displayed on lcd screen with st7735 driver.
+```c
+/** 
+ * Example of USART
+ *
+ * Copyright (C) 2017 Marian Hrinko.
+ * Written by Marian Hrinko (mato.hrinko@gmail.com)
+ *
+ * @author      Marian Hrinko
+ * @datum       12.07.2017
+ * @file        main.c
+ * @tested      AVR Atmega16
+ * @inspiration 
+ * ----------------------------------------------------------------------------------
+ */
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdio.h>
+#include "lib/st7735.h"
+#include "lib/usart.h"
+
+/**
+ * @desc    Simple example receving and transmitting characters displayed on lcd screen with st7735 driver.
+ *
+ * @param   Void
+ * @return  Void
+ */
+int example(void)
+{
+  char i = 0;
+  char val;
+  // init usart
+  UsartInit(eBR_38400, eDATA_8, ePARITY_ODD, eSTOPBITS_1);
+  // init screen
+  St7735Init();
+  // clear screen
+  ClearScreen(0x0000);
+  // set text position
+  SetPosition(5, 10);
+  // draw text
+  DrawString("Usart initialise... ", 0xffff, X1);
+  // show RAM content of display
+  UpdateScreen();
+  // set text position
+  SetPosition(5, 25);
+  // loop sending chars
+  while (i++ < 26) {
+    // get value
+    val = UsartReceive();
+    // draw char
+    DrawChar(val, 0xffff, X1);
+    // set text position
+    SetPosition(5 + 6*i, 25);
+    // send back received value
+    UsartTransmit(val);
+    // show RAM content of display
+    UpdateScreen();
+  }
+  // set text position
+  SetPosition(5, 40);
+  // draw text
+  DrawString("Usart end communication...", 0xffff, X1);
+  // show RAM content of display 
+  UpdateScreen();
+  // return & exit
+  return 0;
+}
 ```
