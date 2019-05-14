@@ -17,19 +17,19 @@ Baudrate enum types calculate UBRR value for selected baudrate. There can be add
 /** @enum UBRR values for different values */
 typedef enum {
   // baudrate  2400 / Error = -0.1% at 16Mhz
-  BR_2400 = _UBRR(2400),
+  eBR_2400 = _UBRR(2400),
   // baudrate  4800 / Error =  0.2% at 16Mhz
-  BR_4800 = _UBRR(4800),
+  eBR_4800 = _UBRR(4800),
   // baudrate  9600 / Error =  0.2% at 16Mhz
-  BR_9600 = _UBRR(9600),
+  eBR_9600 = _UBRR(9600),
   // baudrate  19200 / Error = 0.2% at 16Mhz
-  BR_19200 = _UBRR(19200),
+  eBR_19200 = _UBRR(19200),
   // baudrate  38400 / Error = 0.2% at 16Mhz
-  BR_38400 = _UBRR(38400),
+  eBR_38400 = _UBRR(38400),
   // baudrate  76800 / Error = 0.2% at 16Mhz
-  BR_76800 = _UBRR(76800),
+  eBR_76800 = _UBRR(76800),
   // baudrate 250000 / Error = 0.0% at 16Mhz
-  BR_250000 = _UBRR(250000),
+  eBR_250000 = _UBRR(250000),
 } EBaudrate;
 ```
 ### Framebits
@@ -38,15 +38,15 @@ Framebits enum type defines frame format - number of transmitted and received da
 /** @enum number of bits - 5, 6, 7, 8, 9 */
 typedef enum {
   // 5 bits
-  DATA_5 = 0x00,
+  eDATA_5 = 0x00,
   // 6 bits
-  DATA_6 = 0x02,
+  eDATA_6 = 0x02,
   // 7 bits
-  DATA_7 = 0x04,
+  eDATA_7 = 0x04,
   // 8 bits
-  DATA_8 = 0x06,
+  eDATA_8 = 0x06,
   // 9 bits
-  DATA_9 = 0x43
+  eDATA_9 = 0x43
 } EFramebits;
 ```
 ### Paritybits
@@ -55,11 +55,11 @@ Parity enum type defines parity of data frame. Allowable values are disable pari
 /** @enum parity - none, even, odd */
 typedef enum {
   // none
-  PARITY_NONE = 0x00,
+  ePARITY_NONE = 0x00,
   // even
-  PARITY_EVEN = 0x20,
+  ePARITY_EVEN = 0x20,
   // odd
-  PARITY_ODD  = 0x30
+  ePARITY_ODD  = 0x30
 } EParity;
 ```
 ### Stopbits
@@ -68,9 +68,9 @@ The last mandatory parameter in init function for USART communication is number 
 /** @enum stop bits - 1, 2 */
 typedef enum {
   // 1 stop bit
-  STOPBITS_1 = 0x00,
+  eSTOPBITS_1 = 0x00,
   // 2 stop bits
-  STOPBITS_2 = 0x20
+  eSTOPBITS_2 = 0x20
 } EStopbits;
 ```
 ### Example
@@ -106,7 +106,7 @@ int example(void)
   char i = 0;
   char val;
   // init usart
-  UsartInit(BR_38400, DATA_8, PARITY_ODD, STOPBITS_1);
+  UsartInit(eBR_38400, eDATA_8, ePARITY_ODD, eSTOPBITS_1);
   // init screen
   St7735Init();
   // clear screen
