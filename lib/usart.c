@@ -16,13 +16,13 @@
 #include "usart.h"
 
 /**
- * @description Init UART
- * 
- * @param  Enum E_baudrate
- * @param  Enum E_bits
- * @param  Enum E_parity
- * @param  Enum E_stopbit   
- * @return void
+ * @desc    Init UART
+ *
+ * @param   Enum E_baudrate
+ * @param   Enum E_bits
+ * @param   Enum E_parity
+ * @param   Enum E_stopbit   
+ * @return  void
  */
 void UsartInit (E_baudrate baudrate, E_framebits framebits, E_parity parity, E_stopbits stopbits)
 {
@@ -44,10 +44,10 @@ void UsartInit (E_baudrate baudrate, E_framebits framebits, E_parity parity, E_s
 }
 
 /**
- * @description USART transmit data
+ * @desc    USART transmit data
  *
- * @param  unsigned int
- * @return void
+ * @param   unsigned int
+ * @return  void
  */
 void UsartTransmit (unsigned int data)
 {
@@ -65,10 +65,10 @@ void UsartTransmit (unsigned int data)
 }
          
 /**
- * @description USART receive data
+ * @desc    USART receive data
  *
- * @param  void
- * @return unsigned int
+ * @param   void
+ * @return  unsigned int
  */
 unsigned int UsartReceive (void)
 {
@@ -96,10 +96,10 @@ unsigned int UsartReceive (void)
 }
 
 /**
- * @description Flush buffered data from receive buffer
+ * @desc    Flush buffered data from receive buffer
  *
- * @param  void
- * @return unsigned char
+ * @param   void
+ * @return  unsigned char
  */
 unsigned char UsartFlush (void)
 {
